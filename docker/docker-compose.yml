@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  localstack:
+    container_name: "localstack-javalin-service"
+    labels:
+      service_docker: "javalin-service"
+    image: localstack/localstack
+    network_mode: bridge
+    ports:
+      - "4566:4566"
+    environment:
+      - AWS_DEFAULT_REGION=sa-east-1
+      - AWS_ACCESS_KEY_ID=local-aws
+      - AWS_SECRET_ACCESS_KEY=local-aws
+      - DEFAULT_REGION=sa-east-1
+      - SERVICES=sqs
+    volumes:
+      - "./.localstack:/tmp/localstack"
